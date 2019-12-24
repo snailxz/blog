@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>threejs demo</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+	<script src="three.js"></script>
+	<script src="OrbitControls.js"></script>
+
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+		}
+		canvas {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="box"></canvas>
+
+	<script type="text/javascript">
+		var box = null,renderer = null,scene = null,camera = null;
+		window.onload = function () {
+			init();
+		}
+		window.onresize = function () {
+			init();
+		}
+
+		function init() {
+			// 设置canvas的宽高
+			box = document.getElementById('box');
+			var dpr = window.devicePixelRatio;
+			var boxWidth = document.documentElement.clientWidth * dpr;
+			var boxHeight = document.documentElement.clientHeight * dpr;
+			box.width = boxWidth;
+			box.height = boxHeight;
+
+			// threeJs
+			renderer = new THREE.WebGLRenderer({
+			    canvas: box,
+			    antialias: true // 抗锯齿
+			});
+			renderer.setClearColor(0x000000);
+
+			// 场景
+			scene = new THREE.Scene();
+
+
+			// 相机
+			camera = new THREE.PerspectiveCamera(20, boxWidth / boxHeight, 1, 10000);
+			camera.position.set(0, 0, 500);
+			scene.add(camera);
+
+			// 光源
+			var light = new THREE.AmbientLight(0xffffff);
+			scene.add(light);
+	        // var pointLight = new THREE.PointLight(0xff0000, 4, 200); // (颜色, 光强度, 光照射距离)
+	        // pointLight.position.set(0, 0, 0);
+	        // scene.add(pointLight);
+
+			// 材质
+			var sun = THREE.ImageUtils.loadTexture('sun.jpg', {}, function() {
+				renderer.render(scene, camera);
+			});
+			var texture = THREE.ImageUtils.loadTexture('3.jpg', {}, function() {
+				renderer.render(scene, camera);
+			});
+
+			// 太阳
+			var sun = new THREE.Mesh(new THREE.SphereGeometry(100, 50, 50),
+				new THREE.MeshLambertMaterial({
+					map: sun
+				})
+			);
+    		sun.translateX(0);
+			scene.add(sun);
+
+			// 地球
+			var earth = new THREE.Mesh(new THREE.SphereGeometry(10, 50, 50),
+				new THREE.MeshLambertMaterial({
+					map: texture
+				})
+			);
+    		earth.translateX(2000);
+			scene.add(earth);
+
+			// 黄道面
+			var cube = new THREE.Mesh(new THREE.CubeGeometry(1000, 0, 1000, 10, 10, 10),
+					new THREE.MeshBasicMaterial({
+						color: 0xff0000,
+						wireframe: true
+					})
+					// new THREE.MeshLambertMaterial({
+					//     color: 0xff0000
+					// })
+			);
+			scene.add(cube);
+
+			// 渲染
+			renderer.render(scene, camera);
+			requestAnimationFrame(rederagin);
+			var orbit = new THREE.OrbitControls( camera, box );
+		}
+
+
+		function rederagin () {
+			renderer.render(scene, camera);
+			requestAnimationFrame(rederagin);
+
+		}
+	</script>
+</body>
+</html>

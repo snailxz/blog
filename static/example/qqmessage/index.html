@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>qq未读消息效果</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<style type="text/css">
+		canvas {
+			display: block;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			background-color: #999;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="mycanvas" width="400" height="400"></canvas>
+
+	<script type="text/javascript">
+		var mycanvas = document.getElementById('mycanvas');
+		var cxt = mycanvas.getContext('2d');
+		var canmove = canboom = false;
+
+
+		reset();
+
+		function touchstart(e) {
+			console.log(e)
+			var x = e.offsetX;
+			var y = e.offsetY;
+			if ( x > (200 - 20) && x < (200 + 20) && y > (200 - 20) && y < (200 + 20) ) {
+				canmove = true;	
+				console.log('getpoint')			
+			}
+		}
+
+		function touchmove(e) {
+			if (canmove) {
+				var x = e.offsetX;
+				var y = e.offsetY;
+				var rx = 30-(Math.abs(x-200)/10);
+				var ry = 30-(Math.abs(y-200)/10);
+				var rr = rx < ry ? rx : ry;
+				drwCircle(x, y, rr);
+			}
+		}
+
+		function touchend(e) {
+			canmove = false;
+			if (canboom) {
+				cxt.clearRect(0,0,400,400);
+			} else {
+				//reset();
+				var x = e.offsetX - 200;
+				var y = e.offsetY - 200;
+				inching(x, y);
+			}
+		}
+
+		// 缓动效果
+		function inching(x, y) {
+			if(Math.abs(x) < 10 && Math.abs(y) < 10 ){
+				reset();
+			}else{
+				cxt.clearRect(0,0,400,400);
+				cxt.fillStyle="#FF0000";
+				cxt.beginPath();
+				cxt.arc(200 + (-x),200 + (-y),30,0,Math.PI*2,true);
+				cxt.closePath();
+				cxt.fill();
+				cxt.font="20px Arial";
+				cxt.textAlign="center";
+				cxt.fillStyle = "#fff";
+				cxt.fillText("100",200 + (-x),200 + (-y) + 7);
+				setTimeout(function(){
+					if (x > 0) {
+						x = -(x/2);
+						y = -(y/2);
+					}else{
+						x = -x;
+						y = -y;
+					}
+					inching(x, y);
+				},40);
+			}
+		}
+
+		// 初始化
+		function reset() {
+			cxt.clearRect(0,0,400,400);
+			cxt.fillStyle="#FF0000";
+			cxt.beginPath();
+			cxt.arc(200,200,30,0,Math.PI*2,true);
+			cxt.closePath();
+			cxt.fill();
+			cxt.font="20px Arial";
+			cxt.textAlign="center";
+			cxt.fillStyle = "#fff";
+			cxt.fillText("100", 200, 207);
+		}
+
+
+		// 画圆
+		function drwCircle(x, y, rr){
+			cxt.clearRect(0,0,400,400);
+			if (rr > 12 && !canboom) {
+				drwSquare(x, y, rr);
+			}
+			cxt.fillStyle="#FF0000";
+			cxt.beginPath();
+			cxt.arc(x,y,30,0,Math.PI*2,true);
+			if (rr > 12 && !canboom) {
+				cxt.arc(200,200,rr,0,Math.PI*2,true);
+			}else{
+				canboom = true;
+			}
+			cxt.closePath();
+			cxt.fill();
+			cxt.font="20px Arial";
+			cxt.textAlign="center";
+			cxt.fillStyle = "#fff";
+			cxt.fillText("100",x,y+7);
+		}
+
+		// 画两圆之间的不规则图形
+		function drwSquare(x, y, rr){
+			var zx = (200 - x);
+			var zy = (200 - y);
+
+			// 夹角是公用的
+			var angle1 = -(Math.atan2(zx, zy)/Math.PI*180);
+			var angle2 = 180-(Math.atan2(zx, zy)/Math.PI*180);
+
+			// 小圆第一个点
+			// 已知圆上某扇形夹角 求夹角顶点坐标 http://blog.csdn.net/can3981132/article/details/52559402
+			var sx1 = 200 + rr * Math.cos(angle1 * Math.PI / 180);
+			var sy1 = 200 + rr * Math.sin(angle1 * Math.PI / 180);
+
+			// 小圆第二个点
+			var sx2 = 200 + rr * Math.cos(angle2 * Math.PI / 180);
+			var sy2 = 200 + rr * Math.sin(angle2 * Math.PI / 180);
+
+			// 大圆 第一个点
+			var bx1 = x + 30 * Math.cos(angle1 * Math.PI / 180);
+			var by1 = y + 30 * Math.sin(angle1 * Math.PI / 180);
+			// 大圆 第二个点
+			var bx2 = x + 30 * Math.cos(angle2 * Math.PI / 180);
+			var by2 = y + 30 * Math.sin(angle2 * Math.PI / 180);
+
+			// 曲线趋近点 二次贝塞尔曲线中会用到
+			var allstartX = (x - 200)/(3/2) + 200;
+			var allstartY = (y - 200)/(3/2) + 200;
+
+			cxt.fillStyle="red";
+			cxt.beginPath();
+			cxt.moveTo(sx1, sy1);
+			cxt.lineTo(sx2, sy2);
+			cxt.quadraticCurveTo(allstartX,allstartY,bx2,by2);  // 二次贝塞尔曲线
+			cxt.lineTo(bx1, by1);
+			cxt.quadraticCurveTo(allstartX,allstartY,sx1,sy1);  // 二次贝塞尔曲线
+			cxt.closePath();
+			cxt.fill();
+		}
+		// pc
+		mycanvas.addEventListener('mousedown',touchstart,true);
+		mycanvas.addEventListener('mousemove',touchmove,true);
+		mycanvas.addEventListener('mouseup',touchend,true);
+		// 触屏
+		mycanvas.addEventListener('touchstart',touchstart,true);
+		mycanvas.addEventListener('touchmove',touchmove,true);
+		mycanvas.addEventListener('touchend',touchend,true);
+		
+	</script>
+</body>
+</html>

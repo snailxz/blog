@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>snail-example</title>
+  {{@headerHtml}}
+  <link rel="stylesheet" href="css/public.css">
+  <style>
+    .nav {
+      z-index: 9;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      line-height: 50px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, .9);
+    }
+    .list {
+      margin: 50px auto 0;
+      max-width: 1200px;
+      overflow: hidden;
+    }
+    .item {
+      float: left;
+      position: relative;
+      width: 25%;
+    }
+    .item img {
+      display: block;
+      width: 100%;
+      filter: blur(4px);
+      transition: all .3s;
+    }
+    .item img:hover {
+      filter: blur(0px);
+    }
+    .item .title {
+      position: absolute;
+      bottom: 0;
+      padding: 10px;
+      width: 100%;
+      background: linear-gradient(to top, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0));
+    }
+
+    @media screen and (max-width: 640px) {
+      .item {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2 class="nav"><a href="/">home</a></h2>
+  <ul class="list">
+    {{each example}}
+    <li class="item"><a href="{{ $value.url }}"><img src="{{ $value.img }}" alt=""><p class="title">{{ $value.title }}</p></a></li>
+    {{/each}}
+  </ul>
+</body>
+</html>

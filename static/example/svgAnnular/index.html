@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>svg环形进度条</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		body {
+			background-color: #ccc;
+		}
+		.list {
+			margin: 0 auto;
+			width: 200px;
+			height: 200px;
+		}
+		circle {
+			transition: stroke-dasharray 2s;
+		}
+		#yuan1 {
+			transform-origin: 50% 50%;
+			/*animation:load 1s  linear infinite;*/
+		}
+		@keyframes load{
+			0%{transform:rotate(0)}
+			100%{transform:rotate(-360deg)}
+		}
+		.jianbai {
+		  background-image:-webkit-linear-gradient(to top, orange, green);
+		  background-image:linear-gradient(to top,orange,green);
+		}
+	</style>
+</head>
+<body>
+	<div class="list">
+		<svg width="200" height="200">
+			<defs>
+				<linearGradient id="orange_red" x1="0%" y1="0%" x2="50%" y2="0%">
+					<stop offset="1%" style="stop-color:rgb(255,0,0); stop-opacity:1"/>
+					<stop offset="100%" style="stop-color:rgb(255,255,255); stop-opacity:1"/>
+				</linearGradient>
+			</defs>
+			<circle cx="100" cy="100" r="90" stroke="#D1D3D7" stroke-width="10" fill="none"/>
+			<circle cx="100" cy="100" r="90" stroke="url(#orange_red)" stroke-linecap="round" stroke-width="10" fill="none"  stroke-dasharray="0,566" id="yuan1"/>
+		</svg>
+	</div>
+	<div class="list">
+		<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" version="1.1">
+			<circle cx="100" cy="100" r="90" stroke="#D1D3D7" stroke-width="10" fill="none"/>
+			<circle cx="100" cy="100" r="90" stroke="#00a5e0" stroke-linecap="round" stroke-width="10" fill="none"  stroke-dasharray="0,566" id="yuan2"/>
+		</svg>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<script type="text/javascript">
+		var rli = 0
+		setInterval(function() {
+			$('#yuan1').css('transform', 'rotate('+ rli +'deg)')
+			rli += 0.1
+		}, 1)
+		window.onload = function () {
+			var yuan1 = document.getElementById('yuan1');
+			var yuan2 = document.getElementById('yuan2');
+			yuan1.setAttribute('stroke-dasharray',566*1 + ',566');
+			yuan2.setAttribute('stroke-dasharray',566*0.8 + ',566');
+		}
+	</script>
+</body>
+</html>

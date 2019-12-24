@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css3-充电效果1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100vh;
+      background-color: #aaa;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-color: #000;
+      overflow: hidden;
+    }
+    .num {
+      z-index: 3;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      line-height: 150px;
+      text-align: center;
+      color: #4caf50;
+      font-size: 40px;
+      transform: translate(-50%, 0);
+    }
+    .box {
+      margin: 0 auto;
+      width: 300px;
+      height: 100vh;
+      background-color: #000;
+      filter: contrast(15);
+    }
+    .battery-box {
+      z-index: 2;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      color: #4caf50;
+      transform: translate(-50%, 0);
+      filter: blur(5px);
+    }
+    .battery-box::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      content: "";
+      width: 150px;
+      height: 150px;
+      border-radius: 57% 45% 54% 70%;
+      background-color: #00ff3e;
+      animation: box 8s linear 0s infinite;
+    }
+    @keyframes box {
+      from {transform: rotate(0);}
+      to {transform: rotate(360deg);}
+    }
+    .battery-box::after {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: block;
+      content: "";
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background-color: #000;
+    }
+    .box .battery-bottom {
+      z-index: 1;
+      position: absolute;
+      left: 50%;
+      bottom: -100px;
+      width: 200px;
+      height: 150px;
+      transform: translate(-50%, 0);
+    }
+    .box .battery-bottom .battery {
+      width: 200px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      filter: blur(5px);
+    }
+    .battery-start1 {
+      position: absolute;
+      bottom: 0;
+      left: 50px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery1 5.6s ease-in 0s infinite;
+    }
+    @keyframes battery1 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+    .battery-start2 {
+      position: absolute;
+      bottom: 0;
+      left: 60px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery2 7s ease-in 0s infinite;
+    }
+    @keyframes battery2 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+    .battery-start3 {
+      position: absolute;
+      bottom: 0;
+      left: 60px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery3 5.6s ease-in 2s infinite;
+    }
+    @keyframes battery3 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+    .battery-start4 {
+      position: absolute;
+      bottom: 0;
+      left: 60px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery4 5.7s ease-in 2s infinite;
+    }
+    @keyframes battery4 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+    .battery-start5 {
+      position: absolute;
+      bottom: 0;
+      left: 100px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery5 8.4s ease-in 4s infinite;
+    }
+    @keyframes battery5 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+    .battery-start6 {
+      position: absolute;
+      bottom: 0;
+      left: 110px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #4caf50;
+      animation: battery6 6s ease-in 4.2s infinite;
+    }
+    @keyframes battery6 {
+      from {transform: translate(0, 0);}
+      to {transform: translate(0, -100vh);}
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="num">90%</div>
+    <div class="box">
+      <div class="battery-box"></div>
+      <div class="battery-bottom">
+        <div class="battery">
+          <div class="battery-start1"></div>
+          <div class="battery-start2"></div>
+          <div class="battery-start3"></div>
+          <div class="battery-start4"></div>
+          <div class="battery-start5"></div>
+          <div class="battery-start6"></div>
+          <div class="battery-start1" style="left: 120px; bottom: 20px;"></div>
+          <div class="battery-start2" style="left: 90px; bottom: 5px;"></div>
+          <div class="battery-start3" style="left: 130px; bottom: 30px;"></div>
+          <div class="battery-start4" style="left: 125px; bottom: 15px;"></div>
+          <div class="battery-start5" style="left: 100px; bottom: 9px;"></div>
+          <div class="battery-start6" style="left: 123px; bottom: 7px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

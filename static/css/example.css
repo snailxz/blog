@@ -1,0 +1,32 @@
+.list {
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.item {
+  float: left;
+  position: relative;
+  width: 25%;
+}
+.item img {
+  display: block;
+  width: 100%;
+  filter: blur(4px);
+  transition: all .3s;
+}
+.item img:hover {
+  filter: blur(0px);
+}
+.item .title {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+}
+
+@media screen and (max-width: 640px) {
+  .item {
+    width: 50%;
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>svg路径动画</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			min-height: 100%;
+		}
+		body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			width: 100%;
+			min-height: 100%;
+		}
+		svg {
+			margin-bottom: 50px;
+			width: 50px;
+			height: 50px;
+		}
+		
+		.start circle {
+			transform-origin: 50% 50%;
+			transform: rotate(-90deg);
+			stroke-linecap: round;
+			animation: circle-start 1.5s infinite;
+		}
+		@keyframes circle-start{
+			0% {stroke-dasharray: 0 490;stroke-dashoffset: 0;}
+			39% { stroke-dashoffset: 0;}
+			40% {stroke-dasharray: 367 490;}
+			100% {stroke-dasharray: 20 490;stroke-dashoffset: -470;}
+		}
+
+		.stop circle {
+			transform-origin: 50% 50%;
+			transform: rotate(-90deg);
+			stroke-linecap: round;
+			animation: circle-stop 1.5s normal forwards;
+		}
+		@keyframes circle-stop{
+			0% {stroke-dasharray: 0 490;}
+			100% {stroke-dasharray: 460 490;transform: rotate(50deg);}
+		}
+
+		.stop path {
+			animation: path-stop 1s linear .5s normal forwards;
+		}
+		@keyframes path-stop{
+			0% {stroke-dasharray: 0 200;stroke-linecap: round;}
+			100% {stroke-dasharray: 200 200;stroke-linecap: round;}
+		}
+
+		button {
+			width: 100px;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<svg viewBox="0,0,170,170" preserveAspectRatio="xMinYMin meet" id="box" class="start">
+		<circle cx="85" cy="85" r="78" fill="none" stroke-width="14" stroke="#7ac302" stroke-dasharray="0,490"/>
+		<path d="M43 90 L74 118 L126 50" stroke-width="14" fill="none" stroke="#7ac302" stroke-linejoin="round" stroke-dasharray="0,200"/>
+	</svg>
+	<button id="start">开始</button>
+	<button id="ok">完成</button>
+
+
+	<script>
+		let start = document.querySelectorAll('#start')[0];
+		let ok = document.querySelectorAll('#ok')[0];
+		let box = document.querySelectorAll('svg')[0];
+
+		start.addEventListener('click', function () {
+			console.log('start')
+			box.className.animVal = 'start'
+			box.className.baseVal = 'start'
+		})
+		ok.addEventListener('click', function () {
+			console.log('stop')
+			box.className.animVal = 'stop'
+			box.className.baseVal = 'stop'
+		})
+	</script>
+</body>
+</html>

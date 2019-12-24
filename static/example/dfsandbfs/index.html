@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>基于DOM的深度优先算法和广度优先算法</title>
+  <style>
+    .page {
+      margin: 0 auto;
+      width: 800px;
+    }
+    .Question5,
+    .Question5 div {
+      margin: 5px;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+      <button onclick="dfsDom()">深度优先遍历</button>
+      <button onclick="bfsDom()">广度优先遍历</button>
+      <div class="Question5">
+        boss
+        <div>
+          1========
+          <div>
+              1.1=========
+              <div>
+                  1.1.1=======
+              </div>
+              <div>
+                  1.1.2=======
+                  <div>
+                      1.1.2.1=======
+                  </div>
+                  <div>
+                      1.1.2.2=======
+                      <div>
+                          1.1.2.2.1=========
+                      </div>
+                      <div>
+                          1.1.2.2.2=========
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div>
+              1.2=========
+          </div>
+        </div>
+        <div>
+          2========
+          <div>
+              2.1=========
+              <div>
+                  2.1.1=========
+                  <div>
+                      2.1.1.1=========
+                      <div>
+                          2.1.1.1.1=========
+                      </div>
+                      <div>
+                          2.1.1.1.2=========
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div>
+          3========
+          <div>
+              3.1=========
+          </div>
+          <div>
+              3.2=========
+          </div>
+        </div>
+      </div>
+  </div>
+    
+
+    <script>
+      // 工具方法
+      function $(str) {
+        return document.querySelector(str)
+      }
+      function title(title) {
+        console.log('%c' + title,'font-size: 14px; color: green;')
+      }
+      function title2(title) {
+        console.log('%c' + title,'font-size: 14px; color: #000;')
+      }
+      function sleep(time) {
+        return new Promise(function(resolve, reject) {
+          setTimeout(resolve, time)
+        })
+      }
+      // 深度优先
+      async function dfsDom(arr) {
+        arr = arr || document.querySelectorAll('.Question5')
+        for (let i = 0, len = arr.length; i < len; i++) {
+          arr[i].style.border = '2px solid red'
+          console.log(arr[i].firstChild.nodeValue)
+          await sleep(1000)
+          if (arr[i].children && arr[i].children.length > 0) {
+            await dfsDom([...arr[i].children])
+          }
+        }
+      }
+      // 广度优先
+      async function bfsDom() {
+        const arr = [...document.querySelectorAll('.Question5')]
+        if (arr && arr.length > 0) {
+          while (arr.length) {
+            let item = arr.shift()
+            item.style.border = '2px solid green'
+            console.log(item.firstChild.nodeValue)
+            if (item.children && item.children.length > 0) {
+              arr.push(...item.children)
+            }
+            await sleep(1000)
+          }
+        }
+      }
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css3-充电效果1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100vh;
+      background-color: #aaa;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .box {
+      width: 180px;
+      height: 300px;
+    }
+    .battery-header {
+      margin: 0 auto;
+      width: 30px;
+      height: 15px;
+      border-radius: 5px;
+      background-color: #eee;
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
+    }
+    .battery-body {
+      position: relative;
+      margin: -5px auto 0;
+      width: 180px;
+      height: 290px;
+      border-radius: 10px 10px 5px 5px;
+      background: linear-gradient(to top, rgb(255, 0, 234) 0%, rgb(0, 195, 255) 50%, rgb(102, 255, 0) 100%);
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
+      overflow: hidden;
+    }
+    .battery-body .wave {
+      position: absolute;
+      left: -150px;
+      bottom: 0;
+      width: 480px;
+      height: 480px;
+      border-radius: 45%;
+      background-color: #fff;
+      transform-origin: 50% 50%;
+      transform: rotate(0) translate(0, 0);
+      animation: wavemove 30s linear 0s 1 forwards;
+    }
+    @keyframes wavemove {
+      from {bottom: 0;transform: rotate(0);}
+      to {bottom: 110%;transform: rotate(1800deg);}
+    }
+    .battery-body .wave::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      content: "";
+      width: 480px;
+      height: 480px;
+      border-radius: 45%;
+      background-color: rgba(255, 255, 255, .5);
+      transform-origin: 50% 50%;
+      transform: rotate(60deg);
+    }
+    .battery-body .wave::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      content: "";
+      width: 480px;
+      height: 480px;
+      border-radius: 45%;
+      background-color: rgba(255, 255, 255, .5);
+      transform-origin: 50% 50%;
+      transform: rotate(120deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="battery-header"></div>
+    <div class="battery-body">
+      <div class="wave"></div>
+    </div>
+  </div>
+</body>
+</html>

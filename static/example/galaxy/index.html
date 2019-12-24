@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas星空</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <script>
+    const canvas = document.querySelector('#bg')
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+
+    const ctx = canvas.getContext('2d')
+
+    // 画点
+    function drawStar (starInfo) {
+      ctx.beginPath()
+      ctx.fillStyle = starInfo.c
+      ctx.fillRect(starInfo.x, starInfo.y, starInfo.w, starInfo.w)
+    }
+
+    let total = 1000
+    let data = []
+    const whalf = canvas.width / 2
+    const hhalf = canvas.height / 2
+
+    function newStar (addnum) {
+      for (let i = 0; i < addnum; i++) {
+      const item = {
+        x: Math.random() * canvas.width,  // x
+        y: Math.random() * canvas.height,  // y
+        w: Math.random(),  // 大小
+        c: `rgba(255, 255, 255, ${Math.random() * 0.8})`, // 颜色
+        dir: Math.random() > 0.5 ? 1 : -1  // 方向
+      }
+
+      data.push(item)
+    }
+    }
+
+    function step () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      let i = 0
+      while (i < data.length) {
+        if (data[i].x > 0 && data[i].x < canvas.width && data[i].y > 0 && data[i].y < canvas.height) {
+          data[i].x += (data[i].x - whalf) / 150
+          data[i].y += (data[i].y - hhalf) / 150
+          data[i].w += 0.015  // (0 - Math.abs(data[i].x - whalf)) /
+          drawStar(data[i])
+          i++
+        } else {
+          data.splice(i, 1)
+        }
+      }
+      newStar(total - data.length)
+      window.requestAnimationFrame(step)
+    }
+
+    window.requestAnimationFrame(step)
+
+    window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }, false)
+  </script>
+</body>
+</html>

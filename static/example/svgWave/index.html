@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>svg波浪动画</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ccc;
+    }
+    .box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+    .backimg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+    }
+    svg {
+      display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: #fff;
+        overflow: hidden;
+        
+    }
+    path {
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <svg id="wave"></svg>
+  </div>
+  <script src="./svgWave.js"></script>
+  <script>
+    new svgWave('wave',{
+      waveHeight: 5,
+      perc: 0.5,
+      txt: '50%',
+      percFloat: true,
+      waveFloat: true,
+      bcolor: 'rgba(0, 0, 255, .6)',
+      color: 'rgba(0, 0, 255, .3)'
+    });
+  </script>
+</body>
+</html>

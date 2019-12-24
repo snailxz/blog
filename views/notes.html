@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>snail-blog</title>
+  {{@headerHtml}}
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/notes.css">
+</head>
+<body>
+  <div class="page">
+    <div class="sidebar">
+      <div class="right">
+        <div class="bar-one"></div>
+        <div class="bar-two"></div>
+        <div class="bar-three"></div>
+      </div>
+      <h2 class="title"><a href="/">home</a></h2>
+      <div class="nav-box">
+        <div class="nav-bg"></div>
+        <ul class="nav">
+          {{each notes}}
+            <li class="{{ $value.url === active ? 'active' : '' }}"><a href="/notes/{{ $value.url }}.html">{{ $value.name }}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="content ">
+      <pre class="text">
+        {{@html}}
+      </pre>
+    </div>
+  </div>
+
+  <script src="/js/notes.js"></script>
+</body>
+</html>

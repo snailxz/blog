@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js人脸识别</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      min-height: 100%;
+    }
+    video,
+    canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0)
+    }
+    canvas {
+      z-index: 2
+    }
+    img {
+      display: none;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <video id="myVideo" autoplay="autoplay"></video> 
+  <canvas id="myCanvas" display="none"></canvas>
+  <img id="lxz" src="./face/lxz.jpeg" alt="">
+
+  <script src="./face-api.js"></script>
+  <script>
+    const displaySize = {
+      width: 1280,
+      height: 720
+    }
+    const video = document.querySelector('#myVideo')
+    const canvas = document.querySelector('#myCanvas')
+    canvas.width = displaySize.width
+    canvas.height = displaySize.height
+    const ctx = canvas.getContext('2d')
+
+    // 视频
+    async function videotape() {
+      const result = await faceapi.detectSingleFace(video)
+      ctx.clearRect(0, 0, displaySize.width, displaySize.height)
+      if (result) {
+        const resizedDetections = faceapi.resizeResults(result, displaySize)
+        faceapi.draw.drawDetections(canvas, resizedDetections)
+      }
+      setTimeout(() => {
+        videotape()
+      }, 0);
+    }
+    
+    // 人脸识别
+    async function matcher () {
+      const referenceImage = document.querySelector('#lxz')
+      const results = await faceapi
+        .detectAllFaces(referenceImage)
+        .withFaceLandmarks()
+        .withFaceDescriptors()
+
+      if (!results.length) {
+        return
+      }
+
+      const faceMatcher = new faceapi.FaceMatcher(results)
+
+      const singleResult = await faceapi
+        .detectSingleFace(video)
+        .withFaceLandmarks()
+        .withFaceDescriptor()
+
+      if (singleResult) {
+        const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor)
+        const num = bestMatch.toString()
+        console.log(num)
+        if (num.match(/\(([^)]*)\)/)[1] * 1 < 0.3) {
+          alert('是李向钊本人')
+        } else {
+          alert('不是李向钊')
+        }
+      }
+    }
+    
+    
+
+    // 初始化
+    async function init () {
+      // 加载 model
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('./weights')
+      await faceapi.nets.faceLandmark68Net.loadFromUri('./weights')
+      await faceapi.nets.faceRecognitionNet.loadFromUri('./weights')
+
+      // 添加事件
+      // 识别图片
+      // document.querySelector('#snap').addEventListener('click', picture)
+      // // 识别视频
+      // document.querySelector('#videotape').addEventListener('click', videotape)
+      // // 人脸识别
+      // document.querySelector('#matcher').addEventListener('click', matcher)
+
+      // 获取摄像头 并进行识别
+      navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: { width: displaySize.width, height: displaySize.height }
+      }).then(stream => {
+        video.srcObject = stream
+        video.play()
+        setTimeout(() => {
+          console.log('开始识别')
+          videotape()
+        }, 2000)
+      }).catch(err => {
+        console.log(err)
+        alert('摄像头启用失败')
+      })
+    }
+    init()
+  </script>
+</body>
+</html>
