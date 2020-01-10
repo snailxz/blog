@@ -1,3 +1,4 @@
 node_modules/
 zip/
 gulpfile.js
+*/.DS_Store
