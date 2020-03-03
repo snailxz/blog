@@ -194,10 +194,10 @@ class Game {
     // 这俩事件是键盘玩的
     document.addEventListener('keydown', function (e) {
       _this.keyCode = e.keyCode
-    }, false);
+    }, {passive: true});
     document.addEventListener('keyup', function () {
     	_this.keyCode = false
-    }, false);
+    }, {passive: true});
     // 这个事件是手机玩的
     window.addEventListener('deviceorientation', function (e) {
     	var x = _this.dreamCar.x + (~~e.gamma * 2)
@@ -208,7 +208,7 @@ class Game {
     		x = _this.canvas.width - _this.dreamCar.w
     	}
     	_this.dreamCar.x = x
-    }, false);
+    }, {passive: true});
     this.speedTime = setInterval(() => {
       // console.log('速度倒计时')
       this.speedO += 1 // 产品车速度增加

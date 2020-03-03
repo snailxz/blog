@@ -29,11 +29,21 @@ const headerHtml = `<link rel="shortcut icon" href="/favicon.ico" />
                     <meta name="apple-mobile-web-app-capable" content="yes">
                     <meta name="format-detection" content="telephone=no">
                     <meta name="apple-mobile-web-app-status-bar-style" content="white">`
+const baidu = `<script>
+                var _hmt = _hmt || [];
+                (function() {
+                  var hm = document.createElement("script");
+                  hm.src = "https://hm.baidu.com/hm.js?60b82d2a25053829b15ecaabedb2d255";
+                  var s = document.getElementsByTagName("script")[0]; 
+                  s.parentNode.insertBefore(hm, s);
+                })();
+                </script>`
 
 // css 中间件
 app.use(async (ctx, next) => {
   ctx.state = {
-    headerHtml
+    headerHtml,
+    baidu
   }
   await next()
 })
@@ -121,12 +131,6 @@ router
   })
   .get('/about.html', async (ctx) => {
     await ctx.render('about')
-  })
-  .get('/lianjia', async (ctx) => {
-    await ctx.render('lianjia')
-  })
-  .get('/lianjia.html', async (ctx) => {
-    await ctx.render('lianjia')
   })
 
 app

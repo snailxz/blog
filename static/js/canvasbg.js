@@ -106,7 +106,7 @@
 	}, 16)
 
 	// 鼠标 hover 事件
-	document.addEventListener('mousemove',showMouseStart,true);
+	document.addEventListener('mousemove',showMouseStart,{passive: true});
 
 	// 改变屏幕大小重新计算
 	window.onresize = function () {

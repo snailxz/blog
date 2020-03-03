@@ -2,9 +2,9 @@
   document.querySelector('.right').addEventListener('click', function() {
     this.className = 'right right-show'
     document.querySelector('.page').className = 'page show'
-  }, false)
+  }, {passive: true})
   document.querySelector('.nav-bg').addEventListener('click', function() {
     document.querySelector('.page').className = 'page'
     document.querySelector('.right').className = 'right'
-  }, false)
+  }, {passive: true})
 })(window, document)

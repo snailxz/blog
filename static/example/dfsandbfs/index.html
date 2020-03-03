@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>基于DOM的深度优先算法和广度优先算法</title>
   <style>
@@ -103,7 +103,7 @@
         for (let i = 0, len = arr.length; i < len; i++) {
           arr[i].style.border = '2px solid red'
           console.log(arr[i].firstChild.nodeValue)
-          await sleep(1000)
+          await sleep(500)
           if (arr[i].children && arr[i].children.length > 0) {
             await dfsDom([...arr[i].children])
           }
@@ -120,7 +120,7 @@
             if (item.children && item.children.length > 0) {
               arr.push(...item.children)
             }
-            await sleep(1000)
+            await sleep(500)
           }
         }
       }

@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>100 days css</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 1200px;
+      overflow: hidden;
+    }
+    .css-box {
+      position: relative;
+      margin: 10px;
+      width: 300px;
+      height: 300px;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .seize-box {
+      margin: 0 10px;
+      width: 300px;
+    }
+
+    /* 1 */
+    .css1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courier New', 'Courier', sans-serif;
+      color: #fff;
+      background: #43389F;
+      background: -webkit-linear-gradient(bottom left, #43389F 0%, #4ec6ca 100%);
+      background: -moz-linear-gradient(bottom left, #43389F 0%, #4ec6ca 100%);
+      background: -o-linear-gradient(bottom left, #43389F 0%, #4ec6ca 100%);
+      background: linear-gradient(to top right, #43389F 0%, #4ec6ca 100%); 
+    }
+    .css1 .number{
+      position: relative;
+      width: 195px;
+      height: 100px;
+    }
+    .css1 .number .one-one{
+      z-index: 3;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 100px;
+      border-radius: 4px;
+      background-color: #fff;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+    }
+    .css1 .number .one-two{
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      left: -15px;
+      width: 20px;
+      height: 40px;
+      transform: rotate(45deg);
+      border-radius: 4px;
+      background-color: #fff;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+    }
+    .css1 .number .zero-one,
+    .css1 .number .zero-two{
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 25px solid #fff;
+      box-sizing: border-box;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+    }
+    .css1 .number .zero-one {
+      z-index: 2;
+      right: 85px;
+    }
+    .css1 .number .zero-two {
+      z-index: 1;
+      right: 0px;
+    }
+    .css1 .big {
+      line-height: 60px;
+      font-size: 80px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .css1 .small {
+      font-size: 23px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+
+    /* 2 */
+    .css2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #3FAF82;
+	    color: #fff;
+    }
+    .css2 .menu {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+    .css2 .menu .bar {
+      position: absolute;
+      top: 45px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+    }
+    .css2 .menu .bar-1 {
+      transform: translate3d(0,0,0) rotate(45deg);
+      animation: css2-bar1show-init .7s ease-out forwards;
+    }
+    @keyframes css2-bar1show-init {
+      0% {transform: translate3d(0,0,0) rotate(45deg);}
+      50% {transform: translate3d(0,0,0) rotate(0deg);}
+      100% {transform: translate3d(0,-30px,0) rotate(0deg);}
+    }
+    .css2 .menu .bar-2 {
+      opacity: 0;
+      transform: scale(0);
+      animation: css2-bar2show-init .7s ease-out forwards;
+    }
+    @keyframes css2-bar2show-init {
+      0% {transform: scale(0);opacity: 0;}
+      50% {transform: scale(1);opacity: 1;}
+      100% {transform: scale(1);opacity: 1;}
+    }
+    .css2 .menu .bar-3 {
+      transform: translate3d(0,0,0) rotate(45deg);
+      animation: css2-bar3show-init .7s ease-out forwards;
+    }
+    @keyframes css2-bar3show-init {
+      0% {transform: translate3d(0,0,0) rotate(-45deg);}
+      50% {transform: translate3d(0,0,0) rotate(0deg);}
+      100% {transform: translate3d(0,30px,0) rotate(0deg);}
+    }
+    .css2 .show .bar-1 {
+      animation: css2-bar1show .7s ease-out forwards;
+    }
+    @keyframes css2-bar1show {
+      0% {transform: translate3d(0,-30px,0) rotate(0deg);}
+      50% {transform: translate3d(0,0,0) rotate(0deg);}
+      100% {transform: translate3d(0,0,0) rotate(45deg);}
+    }
+    .css2 .show .bar-2 {
+      animation: css2-bar2show .7s ease-out forwards;
+    }
+    @keyframes css2-bar2show {
+      0% {transform: scale(1);opacity: 1;}
+      50% {transform: scale(0);opacity: 0;}
+      100% {transform: scale(0);opacity: 0;}
+    }
+    .css2 .show .bar-3 {
+      animation: css2-bar3show .7s ease-out forwards;
+    }
+    @keyframes css2-bar3show {
+      0% {transform: translate3d(0,30px,0) rotate(0deg);}
+      50% {transform: translate3d(0,0,0) rotate(0deg);}
+      100% {transform: translate3d(0,0,0) rotate(-45deg);}
+    }
+
+    /* 3 */
+    .css3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #272C34;
+    }
+    .css3 .circle {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: #7DDFFC;
+      overflow: hidden;
+    }
+    .css3 .sun {
+      position: absolute;
+      top: 10px;
+      left: 85px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #FFEF00;
+      transform-origin: 50% 400%;
+      transform: rotate(-180deg);
+    }
+    .css3 .ground {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #F0DE75;
+    }
+    .css3 .side-left {
+      position: absolute;
+      bottom: 60px;
+      left: 35px;
+      height: 57px;
+      width: 116px;
+      background: #F4F4F4;
+      clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+    }
+    .css3 .side-right {
+      position: absolute;
+      bottom: 60px;
+      left: 93px;
+      height: 57px;
+      width: 58px;
+      background: #DDDADA;
+      clip-path: polygon(30% 100%, 100% 100%, 0% 0%);
+    }
+    .css3 .shadow {
+      position: absolute;
+      z-index: 2;
+      top: 140px;
+      left: -80px;
+      height: 30px;
+      width: 360px;
+      background: rgba(0,0,0,0.2);
+      transform-origin: 50% 0%;
+      clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    }
+    .css3 .everyday{
+      opacity: 0;
+      animation: css3-everyday 8s ease-in forwards infinite;
+    }
+    @keyframes css3-everyday {
+      0% {opacity: 0;}
+      10% {opacity: 1;}
+      70% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+    .css3 .everyday .sun{
+      animation: css3-everyday-sun 8s ease-out forwards infinite;
+    }
+    @keyframes css3-everyday-sun {
+      0% {transform: rotate(-90deg);}
+      100% {transform: rotate(90deg);}
+    }
+    .css3 .everyday .side-left {
+      animation: css3-side-left-floor 8s ease-out forwards infinite;
+    }
+    @keyframes css3-side-left-floor {
+      0% {background: #F4F4F4;}
+      100% {background: #CCCCCC;}
+    }
+    .css3 .everyday .side-right {
+      animation: css3-side-right-floor 8s ease-out forwards infinite;
+    }
+    @keyframes css3-side-right-floor {
+      0% {background: #DDDADA;}
+      100% {background: #FFFFFF;}
+    }
+    .css3 .everyday .shadow {
+      animation: css3-shadow-on-the-floor 8s ease-out forwards infinite;
+    }
+    @keyframes css3-shadow-on-the-floor {
+      0% {clip-path: polygon(115px 0%, 231px 0%, 80% 100%);}
+      100% {clip-path: polygon(115px 0%, 231px 0%, 0% 100%);}
+    }
+
+    /* 4 */
+    .css4 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #E56262;
+    }
+    .dot-1 {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 1px 2px 20px 0px rgba(0,0,0,0.6);
+      animation: css4-dot1-floor 5s ease-in-out forwards infinite;
+    }
+    @keyframes css4-dot1-floor {
+      0% {transform: scale(1);}
+      20% {transform: scale(1);}
+      40% {transform: scale(0);}
+      50% {transform: scale(0);}
+      70% {transform: scale(1);}
+      100% {transform: scale(1);}
+    }
+    .dot-2 {
+      z-index: 2;
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 1px 2px 20px 0px rgba(0,0,0,0.4);
+      animation: css4-dot2-floor 5s ease-in-out forwards infinite;
+    }
+    @keyframes css4-dot2-floor {
+      0% {transform: scale(1);}
+      10% {transform: scale(1);}
+      30% {transform: scale(0);}
+      60% {transform: scale(0);}
+      80% {transform: scale(1);}
+      100% {transform: scale(1);}
+    }
+    .dot-3 {
+      z-index: 3;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 1px 2px 20px 0px rgba(0,0,0,0.3);
+      animation: css4-dot3-floor 5s ease-in-out forwards infinite;
+    }
+    @keyframes css4-dot3-floor {
+      0% {transform: scale(1);}
+      20% {transform: scale(0);}
+      70% {transform: scale(0);}
+      90% {transform: scale(1);}
+      100% {transform: scale(1);}
+    }
+
+    /* 5 */
+    .css5 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #42A7A1;
+    }
+    .css5 .chart {
+      width: 240px;
+      height: 180px;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+      background: #FFF;
+    }
+    .css5 .chart-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      width: 100%;
+      height: 50px;
+      color: #FFF;
+      background: #F1BA64;
+      box-sizing: border-box;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+    }
+    .css5 .chart-top .title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .css5 .chart-top .time {
+      font-size: 12px;
+    }
+    .css5 .chart-top .revenue {
+      font-size: 12px;
+      text-align: right;
+    }
+    .css5 .chart-top .money {
+      font-size: 14px;
+      text-align: right;
+    }
+    .css5 .chart-body {
+      position: relative;
+      margin: 25px auto 0;
+      width: 210px;
+      height: 80px;
+    }
+    .css5 .chart-body .bg-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+    }
+    .css5 .chart-body .bg-line .line {
+      width: 100%;
+      height: 1px;
+      background-color: #e9e9e9;
+    }
+    .css5 .chart-body .days {
+      position: absolute;
+      top: 100%;
+      left: -10px;
+      display: flex;
+      justify-content: space-between;
+      width: 230px;
+      line-height: 20px;
+    }
+    .css5 .chart-body .days .day {
+      flex: 1;
+      font-size: 12px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #999;
+    }
+    .css5 .chart-body .data-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .css5 .chart-body .point {
+      z-index: 2;
+      position: absolute;
+      margin: -3px 0 0 -3px;
+      display: flex;
+      justify-content: center;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all .3s;
+    }
+    .css5 .chart-body .data-line .point .tooltip {
+      position: absolute;
+      bottom: 100%;
+      padding: 0 5px;
+      line-height: 18px;
+      font-size: 12px;
+      border-radius: 4px;
+      color: #FFF;
+      opacity: 0;
+      transition: all .3s;
+    }
+    .css5 .chart-body .data-line .point .tooltip::before {
+      position: absolute;
+      display: block;
+      content: '';
+      height: 6px;
+      width: 6px;
+      left: 50%;
+      margin-left: -3px;
+      bottom: -3px;
+      transform: rotate(45deg);
+    }
+    .css5 .chart-body .red .point,
+    .css5 .chart-body .red .tooltip,
+    .css5 .chart-body .red .tooltip::before {
+      background: red;
+    }
+    .css5 .chart-body .red .views {
+      position: absolute;
+      top: -20px;
+      right: 100px;
+      cursor: pointer;
+    }
+    .css5 .chart-body .red .views::before {
+      position: absolute;
+      top: 9px;
+      left: -15px;
+      content: "";
+      display: block;
+      width: 10px;
+      height: 2px;
+      background-color: red;
+    }
+    .css5 .chart-body .red .views:hover+svg polyline {
+      stroke-width: 2px;
+    }
+    .css5 .chart-body .blue .point,
+    .css5 .chart-body .blue .tooltip,
+    .css5 .chart-body .blue .tooltip::before {
+      background: blue;
+    }
+    .css5 .chart-body .blue .purchases {
+      position: absolute;
+      top: -20px;
+      right: 0;
+      cursor: pointer;
+    }
+    .css5 .chart-body .blue .purchases::before {
+      position: absolute;
+      top: 9px;
+      left: -15px;
+      content: "";
+      display: block;
+      width: 10px;
+      height: 2px;
+      background-color: blue;
+    }
+    .css5 .chart-body .blue .purchases:hover+svg polyline {
+      stroke-width: 2px;
+    }
+    .css5 .chart-body .data-line .point:hover {
+      margin: -5px 0 0 -5px;
+      width: 10px;
+      height: 10px;
+    }
+    .css5 .chart-body .data-line .point:hover .tooltip {
+      opacity: .8;
+      transform: translate(0, -5px);
+    }
+
+    /* 6 */
+    .css6 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #CA7C4E;
+      background: -webkit-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
+      background: -moz-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
+      background: -o-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
+      background: linear-gradient(to top right, #EEBE6C 0%, #CA7C4E 100%);
+    }
+    .css6 .card {
+      display: flex;
+      justify-content: space-between;
+      width: 260px;
+      height: 260px;
+      border-radius: 3px;
+      background: #fff;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+    }
+    .css6 .card .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 160px;
+      height: 100%;
+    }
+    .css6 .card .left .avtar {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+    .css6 .card .left .avtar .circle-1 {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border-width: 1px;
+			border-style: solid;
+      border-color: #999 transparent #999 #999;
+      transition: all 2s ease-in-out;
+    }
+    .css6 .card .left .avtar .circle-2 {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border-width: 1px;
+			border-style: solid;
+      border-color: #999 #999 #999 transparent;
+      transition: all 1.3s ease-in-out;
+    }
+    .css6 .card .left .avtar:hover .circle-1 {
+      transform: rotate(360deg);
+    }
+    .css6 .card .left .avtar:hover .circle-2 {
+      transform: rotate(-360deg);
+    }
+    .css6 .card .left .avtar .avtar-img {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .css6 .card .left .name {
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .css6 .card .left .job {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .css6 .card .left .btn {
+      margin-top: 10px;
+      width: 100px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid #786450;
+      background: none;
+      transition: all .3s;
+    }
+    .css6 .card .left .btn:hover {
+      color: #fff;
+      background: #786450;
+    }
+    .css6 .card .right {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      height: 100%;
+      background: #F5E8DF;
+    }
+    .css6 .card .right .box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      width: 100%;
+      border-top: 1px solid #fff;
+      transition: all .5s;
+      cursor: pointer;
+    }
+    .css6 .card .right .box:nth-child(1) {
+      border: none;
+    }
+    .css6 .card .right .box:hover {
+      background: rgba(0, 0, 0, .1);
+    }
+
+    /* 7 */
+    .css7 {
+      background: #264057;
+    }
+    .css7 .icon {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+    .css7 .box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .css7 .menu {
+      position: absolute;
+      padding: 15px 0;
+      width: 120px;
+      height: 200px;
+      border-radius: 3px;
+      background: #43627D;
+      list-style: none;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+      transition: all .5s;
+    }
+    .css7 .menu li {
+      padding: 0 10px;
+      line-height: 35px;
+      font-size: 14px;
+      color: #93B2CD;
+      cursor: pointer;
+    }
+    .css7 .menu li:hover {
+      color: #fff;
+      background: #385269;
+    }
+    .css7 .card {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+      transition: all .5s;
+      overflow: hidden;
+    }
+    .css7 .card .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      width: 100%;
+      height: 50px;
+      color: #fff;
+      background: #5F98CD;
+    }
+    .css7 .card .header .input {
+      position: absolute;
+      left: 10px;
+      padding: 10px;
+      width: 180px;
+      height: 30px;
+      border: none;
+      border-radius: 15px;
+      background-color: #fff;
+      outline: none;
+      transform: translate3d(400px, 0, 0);
+      opacity: 0;
+      transition: opacity .5s, transform .5s;
+    }
+    .css7 .card .list {
+      position: relative;
+      padding: 0 25px;
+      width: 100%;
+      height: 190px;
+    }
+    .css7 .card .list::before {
+      position: absolute;
+      top: 0;
+      left: 15px;
+      display: block;
+      content: "";
+      width: 2px;
+      height: 100%;
+      background-color: #ccc;
+    }
+    .css7 .card .list .item {
+      position: relative;
+      margin-bottom: 10px;
+      font-size: 12px;
+      transform: translate3d(0, 100px, 0);
+      opacity: 0;
+    }
+    .css7 .card .list .item::before {
+      position: absolute;
+      top: 0;
+      left: -17px;
+      display: block;
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    .css7 .card .list .item::after {
+      position: absolute;
+      top: 3px;
+      left: -13px;
+      display: block;
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      border: 2px solid #5F98CD;
+    }
+    .css7 .card .list .item:nth-child(1) {
+      animation: css7-item-floor 1s ease-in-out 0s forwards;
+    }
+    .css7 .card .list .item:nth-child(2) {
+      animation: css7-item-floor 1s ease-in-out .3s forwards;
+    }
+    .css7 .card .list .item:nth-child(3) {
+      animation: css7-item-floor 1s ease-in-out .6s forwards;
+    }
+    @keyframes css7-item-floor {
+      0% {transform: translate3d(0, 100px, 0);opacity: 0;}
+      100% {transform: translate3d(0, 0, 0);opacity: 1;}
+    }
+    .css7 .show .menu {
+      transform: translate3d(-60px, 0, 0);
+    }
+    .css7 .show .card {
+      transform: translate3d(80px, 0, 0);
+    }
+    .css7 .card .header .show {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+
+    /* 8 */
+    .css8 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      filter: contrast(15);
+    }
+    .css8 .box{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #fff;
+      filter: blur(5px);
+    }
+    .css8 .box .ball {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: css8-ball-move 3.2s linear forwards infinite;
+    }
+    .css8 .box .ball:nth-child(1) {
+      top: -40px;
+      left: 100px;
+      width: 16px;
+      height: 16px;
+      transform-origin: 50% 340%;
+    }
+    .css8 .box .ball:nth-child(2) {
+      top: 50px;
+      left: 100px;
+      width: 20px;
+      height: 20px;
+      transform-origin: 50% 260%;
+      animation-delay: .3s;
+    }
+    .css8 .box .ball:nth-child(3) {
+      top: 20px;
+      left: -20px;
+      width: 14px;
+      height: 14px;
+      transform-origin: 50% 280%;
+      animation-delay: .1s;
+    }
+    .css8 .box .ball:nth-child(4) {
+      top: 70px;
+      left: 30px;
+      width: 18px;
+      height: 18px;
+      transform-origin: 50% 270%;
+      animation-delay: .2s;
+    }
+    .css8 .box .ball:nth-child(5) {
+      top: 70px;
+      left: 30px;
+      width: 20px;
+      height: 20px;
+      transform-origin: 50% 160%;
+      animation-delay: .3s;
+    }
+    .css8 .box .ball:nth-child(6) {
+      top: -20px;
+      left: 30px;
+      width: 16px;
+      height: 16px;
+      transform-origin: 50% 330%;
+    }
+    .css8 .box .ball:nth-child(7) {
+      top: 10px;
+      left: 30px;
+      width: 30px;
+      height: 30px;
+      transform-origin: 50% 180%;
+    }
+    @keyframes css8-ball-move {
+      0%{transform: rotate(0);}
+      100%{transform: rotate(360deg);}
+    }
+
+    /* 9 */
+    .css9 {
+      color: #394568;
+      border-radius: 2px;
+      background: #1A2238;
+    }
+    .css9 .scene {
+      position: relative;
+      width: 100%;
+      height: 220px;
+    }
+    .css9 .scene .moon {
+      position: absolute;
+      bottom: 0;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #F6EDBD;
+      box-shadow: 0 0 10px 0 #F6EDBD;
+      overflow: hidden;
+      animation: css9-moon-move .8s ease-out forwards;
+    }
+    @keyframes css9-moon-move {
+      0% {transform: translate3d(0, 0, 0);}
+      100% {transform: translate3d(0, -120px, 0);}
+    }
+    .css9 .scene .moon .keng {
+      position: absolute;
+      border-radius: 50%;
+      background: #ECE1A8;
+    }
+    .css9 .scene .moon .keng:nth-child(1) {
+      top: 13px;
+      left: 20px;
+      width: 6px;
+      height: 6px;
+    }
+    .css9 .scene .moon .keng:nth-child(2) {
+      top: 25px;
+      left: 30px;
+      width: 8px;
+      height: 8px;
+    }
+    .css9 .scene .moon .keng:nth-child(3) {
+      top: 29px;
+      left: 40px;
+      width: 6px;
+      height: 6px;
+    }
+    .css9 .scene .moon .keng:nth-child(4) {
+      top: 40px;
+      left: 0px;
+      width: 12px;
+      height: 12px;
+    }
+    .css9 .scene .moon .keng:nth-child(5) {
+      top: 40px;
+      left: 20px;
+      width: 8px;
+      height: 8px;
+    }
+    .css9 .scene .moon .keng:nth-child(6) {
+      top: 10px;
+      left: 50px;
+      width: 8px;
+      height: 8px;
+    }
+    .css9 .scene .moon .keng:nth-child(7) {
+      top: 25px;
+      left: 15px;
+      width: 4px;
+      height: 4px;
+    }
+    .css9 .scene .moon .keng:nth-child(8) {
+      top: 50px;
+      left: 40px;
+      width: 6px;
+      height: 6px;
+    }
+    .css9 .scene .mountain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .css9 .scene .mountain .moun {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+    }
+    .css9 .scene .mountain .moun:nth-child(1) {
+      top: 130px;
+      left: -80px;
+      background: #26314F;
+    }
+    .css9 .scene .mountain .moun:nth-child(2) {
+      top: 130px;
+      right: -80px;
+      background: #26314F;
+    }
+    .css9 .scene .mountain .moun:nth-child(3) {
+      top: 160px;
+      left: -150px;
+      background: #303C5D;
+    }
+    .css9 .scene .mountain .moun:nth-child(4) {
+      top: 160px;
+      left: 20px;
+      background: #303C5D;
+    }
+    .css9 .scene .mountain .moun:nth-child(5) {
+      top: 160px;
+      right: -150px;
+      background: #303C5D;
+    }
+    .css9 .scene .rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .css9 .scene .rain .drop {
+      position: absolute;
+      top: -10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7FC1F9;
+      transform-origin: 50% 100%;
+      animation: css9-rain-move 1.2s linear 0s infinite normal;
+    }
+    @keyframes css9-rain-move {
+      0% {transform: translate3d(0,0,0) scale(1, 1) rotate(20deg);}
+      85% {transform: translate3d(0,210px,0) scale(1, 1) rotate(20deg);}
+      100% {transform: translate3d(0,230px,0) scale(3, 0) rotate(0);}
+    }
+    .css9 .scene .rain .drop::before {
+      position: absolute;
+      top: -2px;
+      left: 1px;
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #7FC1F9;
+    }
+    .css9 .scene .rain .drop::after {
+      position: absolute;
+      top: -3px;
+      left: 2px;
+      content: "";
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: #7FC1F9;
+    }
+    .css9 .scene .rain .drop:nth-child(1) {
+      left: 10px;
+      animation-delay: .3s;
+      animation-duration: .8s;
+    }
+    .css9 .scene .rain .drop:nth-child(2) {
+      left: 28px;
+      animation-delay: .8s;
+      animation-duration: .6s;
+    }
+    .css9 .scene .rain .drop:nth-child(3) {
+      left: 40px;
+      animation-delay: .5s;
+      animation-duration: 1.2s;
+    }
+    .css9 .scene .rain .drop:nth-child(4) {
+      left: 100px;
+      animation-delay: .8s;
+      animation-duration: 1s;
+    }
+    .css9 .scene .rain .drop:nth-child(5) {
+      left: 180px;
+      animation-delay: .7s;
+      animation-duration: .8s;
+    }
+    .css9 .scene .rain .drop:nth-child(6) {
+      left: 220px;
+      animation-delay: .7s;
+      animation-duration: 1.8s;
+    }
+    .css9 .scene .rain .drop:nth-child(7) {
+      left: 280px;
+      animation-delay: .7s;
+      animation-duration: .9s;
+    }
+    .css9 .scene .rain .drop:nth-child(8) {
+      left: 230px;
+      animation-delay: .7s;
+      animation-duration: .8s;
+    }
+    .css9 .scene .rain .drop:nth-child(9) {
+      left: 210px;
+      animation-delay: .3s;
+      animation-duration: .6s;
+    }
+    .css9 .scene .rain .drop:nth-child(10) {
+      left: 270px;
+      animation-delay: .4s;
+      animation-duration: 1.1s;
+    }
+    .css9 .scene .rain .drop:nth-child(11) {
+      left: 210px;
+      animation-delay: .2s;
+      animation-duration: 1s;
+    }
+    .css9 .scene .rain .drop:nth-child(12) {
+      left: 130px;
+      animation-delay: .2s;
+      animation-duration: .7s;
+    }
+    .css9 .scene .rain .drop:nth-child(13) {
+      left: 218px;
+      animation-delay: .3s;
+      animation-duration: .6s;
+    }
+    .css9 .scene .rain .drop:nth-child(14) {
+      left: 148px;
+      animation-delay: .3s;
+      animation-duration: .6s;
+    }
+    .css9 .scene .rain .drop:nth-child(15) {
+      left: 160px;
+      animation-delay: .2s;
+      animation-duration: .8s;
+    }
+    .css9 .scene .rain .drop:nth-child(16) {
+      left: 128px;
+      animation-delay: .3s;
+      animation-duration: .4s;
+    }
+    .css9 .scene .rain .drop:nth-child(17) {
+      left: 150px;
+      animation-delay: .3s;
+      animation-duration: .9s;
+    }
+    .css9 .info {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 20px;
+      width: 100%;
+      height: 80px;
+      background-color: #fff;
+    }
+    .css9 .info .temperature {
+      font-size: 35px;
+      font-weight: 100;
+    }
+    .css9 .info .wind-humidity {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 5px;
+      height: 35px;
+      font-size: 12px;
+    }
+    .css9 .info .tue-wed {
+      position: absolute;
+      right: 20px;
+      width: 80px;
+      font-size: 12px;
+    }
+    .css9 .info .tue-wed .item {
+      display: flex;
+      width: 100%;
+    }
+    .css9 .info .tue-wed .item .name {
+      flex-shrink: 0;
+      width: 30px;
+      text-align: right;
+    }
+    .css9 .info .tue-wed .item .num {
+      width: 50px;
+      text-align: right;
+    }
+
+    /* 10 */
+    .css10 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #4C4C4C;
+    }
+    .css10 .clock {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 10px solid #3A3A3A;
+      background: #242424;
+    }
+    .css10 .clock .circle {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 534;
+      animation: css10-circle-move 4.6s linear infinite;
+    }
+    @keyframes css10-circle-move {
+      0%{stroke-dashoffset: 534;transform: rotate(-90deg);}
+      50%{stroke-dashoffset: 0;transform: rotate(-90deg);}
+      100%{stroke-dashoffset: 534;transform: rotate(270deg);}
+    }
+    .css10 .clock .second {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .css10 .clock .second .item {
+      position: absolute;
+      top: 88px;
+      left: 10px;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: #fff;
+      transform-origin: 80px 50%;
+    }
+    .css10 .clock .second .item:nth-child(1) {
+      transform: rotate(0deg);
+    }
+    .css10 .clock .second .item:nth-child(2) {
+      transform: rotate(6deg);
+    }
+    .css10 .clock .second .item:nth-child(3) {
+      transform: rotate(12deg);
+    }
+    .css10 .clock .second .item:nth-child(4) {
+      transform: rotate(18deg);
+    }
+    .css10 .clock .second .item:nth-child(5) {
+      transform: rotate(24deg);
+    }
+    .css10 .clock .second .item:nth-child(6) {
+      transform: rotate(30deg);
+    }
+    .css10 .clock .second .item:nth-child(7) {
+      transform: rotate(36deg);
+    }
+    .css10 .clock .second .item:nth-child(8) {
+      transform: rotate(42deg);
+    }
+    .css10 .clock .second .item:nth-child(9) {
+      transform: rotate(48deg);
+    }
+    .css10 .clock .second .item:nth-child(10) {
+      transform: rotate(54deg);
+    }
+    .css10 .clock .second .item:nth-child(11) {
+      transform: rotate(60deg);
+    }
+    .css10 .clock .second .item:nth-child(12) {
+      transform: rotate(66deg);
+    }
+    .css10 .clock .second .item:nth-child(13) {
+      transform: rotate(72deg);
+    }
+    .css10 .clock .second .item:nth-child(14) {
+      transform: rotate(78deg);
+    }
+    .css10 .clock .second .item:nth-child(15) {
+      transform: rotate(84deg);
+    }
+    .css10 .clock .second .item:nth-child(16) {
+      transform: rotate(90deg);
+    }
+    .css10 .clock .second .item:nth-child(17) {
+      transform: rotate(96deg);
+    }
+    .css10 .clock .second .item:nth-child(18) {
+      transform: rotate(102deg);
+    }
+    .css10 .clock .second .item:nth-child(19) {
+      transform: rotate(108deg);
+    }
+    .css10 .clock .second .item:nth-child(20) {
+      transform: rotate(114deg);
+    }
+    .css10 .clock .second .item:nth-child(21) {
+      transform: rotate(120deg);
+    }
+    .css10 .clock .second .item:nth-child(22) {
+      transform: rotate(126deg);
+    }
+    .css10 .clock .second .item:nth-child(23) {
+      transform: rotate(132deg);
+    }
+    .css10 .clock .second .item:nth-child(24) {
+      transform: rotate(138deg);
+    }
+    .css10 .clock .second .item:nth-child(25) {
+      transform: rotate(144deg);
+    }
+    .css10 .clock .second .item:nth-child(26) {
+      transform: rotate(150deg);
+    }
+    .css10 .clock .second .item:nth-child(27) {
+      transform: rotate(156deg);
+    }
+    .css10 .clock .second .item:nth-child(28) {
+      transform: rotate(162deg);
+    }
+    .css10 .clock .second .item:nth-child(29) {
+      transform: rotate(168deg);
+    }
+    .css10 .clock .second .item:nth-child(30) {
+      transform: rotate(174deg);
+    }
+    .css10 .clock .second .item:nth-child(31) {
+      transform: rotate(-6deg);
+    }
+    .css10 .clock .second .item:nth-child(32) {
+      transform: rotate(-12deg);
+    }
+    .css10 .clock .second .item:nth-child(33) {
+      transform: rotate(-18deg);
+    }
+    .css10 .clock .second .item:nth-child(34) {
+      transform: rotate(-24deg);
+    }
+    .css10 .clock .second .item:nth-child(35) {
+      transform: rotate(-30deg);
+    }
+    .css10 .clock .second .item:nth-child(36) {
+      transform: rotate(-36deg);
+    }
+    .css10 .clock .second .item:nth-child(37) {
+      transform: rotate(-42deg);
+    }
+    .css10 .clock .second .item:nth-child(38) {
+      transform: rotate(-48deg);
+    }
+    .css10 .clock .second .item:nth-child(39) {
+      transform: rotate(-54deg);
+    }
+    .css10 .clock .second .item:nth-child(40) {
+      transform: rotate(-60deg);
+    }
+    .css10 .clock .second .item:nth-child(41) {
+      transform: rotate(-66deg);
+    }
+    .css10 .clock .second .item:nth-child(42) {
+      transform: rotate(-72deg);
+    }
+    .css10 .clock .second .item:nth-child(43) {
+      transform: rotate(-78deg);
+    }
+    .css10 .clock .second .item:nth-child(44) {
+      transform: rotate(-84deg);
+    }
+    .css10 .clock .second .item:nth-child(45) {
+      transform: rotate(-90deg);
+    }
+    .css10 .clock .second .item:nth-child(46) {
+      transform: rotate(-96deg);
+    }
+    .css10 .clock .second .item:nth-child(47) {
+      transform: rotate(-102deg);
+    }
+    .css10 .clock .second .item:nth-child(48) {
+      transform: rotate(-108deg);
+    }
+    .css10 .clock .second .item:nth-child(49) {
+      transform: rotate(-114deg);
+    }
+    .css10 .clock .second .item:nth-child(50) {
+      transform: rotate(-120deg);
+    }
+    .css10 .clock .second .item:nth-child(51) {
+      transform: rotate(-126deg);
+    }
+    .css10 .clock .second .item:nth-child(52) {
+      transform: rotate(-132deg);
+    }
+    .css10 .clock .second .item:nth-child(53) {
+      transform: rotate(-138deg);
+    }
+    .css10 .clock .second .item:nth-child(54) {
+      transform: rotate(-144deg);
+    }
+    .css10 .clock .second .item:nth-child(55) {
+      transform: rotate(-150deg);
+    }
+    .css10 .clock .second .item:nth-child(56) {
+      transform: rotate(-156deg);
+    }
+    .css10 .clock .second .item:nth-child(57) {
+      transform: rotate(-162deg);
+    }
+    .css10 .clock .second .item:nth-child(58) {
+      transform: rotate(-168deg);
+    }
+    .css10 .clock .second .item:nth-child(59) {
+      transform: rotate(-174deg);
+    }
+    .css10 .clock .second .item:nth-child(60) {
+      transform: rotate(-180deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 1 -->
+    <div class="css-box css1">
+      <div class="number">
+        <div class="one-one"></div>
+        <div class="one-two"></div>
+        <div class="zero-one"></div>
+        <div class="zero-two"></div>
+      </div>
+      <span class="big">Days</span>
+      <span class="small">CSS Challenge</span>
+    </div>
+    <!-- 2 -->
+    <div class="css-box css2">
+      <div class="menu" id="css2-menu">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="css-box css3">
+      <div class="circle everyday">
+        <div class="sun"></div>
+        <div class="side-left"></div>
+        <div class="side-right"></div>
+        <div class="shadow"></div>
+        <div class="ground"></div>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="css-box css4">
+      <div class="dot-1"></div>
+      <div class="dot-2"></div>
+      <div class="dot-3"></div>
+    </div>
+    <!-- 5 -->
+    <div class="css-box css5">
+      <div class="chart">
+        <div class="chart-top">
+          <div class="title-time">
+            <p class="title">Weekly report</p>
+            <p class="time">01. Feb - 07. Feb</p>
+          </div>
+          <div class="revenue-money">
+            <p class="revenue">Revenue</p>
+            <p class="money">$ 3621.79</p>
+          </div>
+        </div>
+        <div class="chart-body">
+          <!-- <div class="legend">
+            <span class="views">Views</span>
+            <span class="purchases">Purchases</span>
+          </div> -->
+          <div class="bg-line">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+          <div class="days">
+            <span class="day">Mon</span>
+            <span class="day">Tue</span>
+            <span class="day">Wed</span>
+            <span class="day">Thu</span>
+            <span class="day">Fri</span>
+            <span class="day">Sat</span>
+            <span class="day">Sun</span>
+          </div>
+          <div class="data-line red">
+            <span class="views">Views</span>
+            <svg width="210" height="80">
+              <polyline points="0,20 30,12 60,23 120,11 150,38 180,48 210,19" fill="none" stroke="red" stroke-width="1" stroke-linecap="round"></polyline>    
+            </svg>
+            <div class="data-line">
+              <span class="point" style="left: 0; top: 20px;"><div class="tooltip">60</div></span>
+              <span class="point" style="left: 30px; top: 12px;"><div class="tooltip">68</div></span>
+              <span class="point" style="left: 60px; top: 23px;"><div class="tooltip">57</div></span>
+              <span class="point" style="left: 120px; top: 11px;"><div class="tooltip">69</div></span>
+              <span class="point" style="left: 150px; top: 38px;"><div class="tooltip">42</div></span>
+              <span class="point" style="left: 180px; top: 48px;"><div class="tooltip">32</div></span>
+              <span class="point" style="left: 210px; top: 19px;"><div class="tooltip">61</div></span>
+            </div>
+          </div>
+          <div class="data-line blue">
+            <span class="purchases">Purchases</span>
+            <svg width="210" height="80">
+              <polyline points="0,40 30,32 60,53 120,31 150,58 180,58 210,49" fill="none" stroke="blue" stroke-width="1" stroke-linecap="round"></polyline>    
+            </svg>
+            <div class="data-line">
+              <span class="point" style="left: 0; top: 40px;"><div class="tooltip">40</div></span>
+              <span class="point" style="left: 30px; top: 32px;"><div class="tooltip">48</div></span>
+              <span class="point" style="left: 60px; top: 53px;"><div class="tooltip">27</div></span>
+              <span class="point" style="left: 120px; top: 31px;"><div class="tooltip">49</div></span>
+              <span class="point" style="left: 150px; top: 58px;"><div class="tooltip">22</div></span>
+              <span class="point" style="left: 180px; top: 58px;"><div class="tooltip">22</div></span>
+              <span class="point" style="left: 210px; top: 49px;"><div class="tooltip">31</div></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="css-box css6">
+      <div class="card">
+        <div class="left">
+          <div class="avtar">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+            <img class="avtar-img" src="/icon.png" alt="snailxz">
+          </div>
+          <p class="name">snailxz</p>
+          <p class="job">前端工程师</p>
+          <button class="btn">按钮1</button>
+          <button class="btn">按钮2</button>
+        </div>
+        <div class="right">
+          <div class="box">
+            <p class="num">1000</p>
+            <p class="name">likes</p>
+          </div>
+          <div class="box">
+            <p class="num">1000</p>
+            <p class="name">likes</p>
+          </div>
+          <div class="box">
+            <p class="num">1000</p>
+            <p class="name">likes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 7 -->
+    <div class="css-box css7">
+      <div class="box" id="css7-box">
+        <ul class="menu">
+          <li>菜单一</li>
+          <li>菜单二</li>
+          <li>菜单三</li>
+          <li>菜单四</li>
+          <li>菜单五</li>
+        </ul>
+        <div class="card">
+          <div class="header">
+            <span class="icon" id="css7-open"></span>
+            <p>Notifications</p>
+            <span class="icon" id="css7-search"></span>
+            <input class="input" type="text" placeholder="search..." id="css7-input">
+          </div>
+          <div class="list">
+            <div class="item">
+              <p class="time">8:19 AM</p>
+              <p class="text"><b>Alice Parker</b> commented your last post.</p>
+            </div>
+            <div class="item">
+              <p class="time">8:19 AM</p>
+              <p class="text"><b>Alice Parker</b> commented your last post.</p>
+            </div>
+            <div class="item">
+              <p class="time">8:19 AM</p>
+              <p class="text"><b>Alice Parker</b> commented your last post.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 8 -->
+    <div class="css-box css8">
+      <div class="box">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+      </div>
+    </div>
+    <!-- 9 -->
+    <div class="css-box css9">
+      <div class="scene">
+        <div class="moon">
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+          <div class="keng"></div>
+        </div>
+        <div class="mountain">
+          <div class="moun"></div>
+          <div class="moun"></div>
+          <div class="moun"></div>
+          <div class="moun"></div>
+          <div class="moun"></div>
+        </div>
+        <div class="rain">
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+          <div class="drop"></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="temperature">19°</div>
+        <div class="wind-humidity">
+          <div class="wind">Wind: E 7 km/h</div>
+          <div class="humidity">Humidity: 87%</div>
+        </div>
+        <div class="tue-wed">
+          <div class="item">
+            <span class="name">TUE</span>
+            <span class="num">21° / 9°</span>
+          </div>
+          <div class="item">
+            <span class="name">WED</span>
+            <span class="num">23° / 10°</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 10 -->
+    <div class="css-box css10">
+      <div class="clock">
+        <svg width="180" height="180">
+          <circle class="circle" cx="90" cy="90" r="85" stroke="#F85B5B" fill="none" stroke-width="3"></circle>
+        </svg>
+        <div class="second">
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+        </div>
+        <div class="time">13:45</div>
+      </div>
+    </div>
+
+    <div class="css-box css1"></div>
+    <div class="seize-box"></div>
+    <div class="seize-box"></div>
+    <div class="seize-box"></div>
+  </div>
+
+  <script>
+    // 公共方法
+    const $ = (el) => {
+      return document.querySelector(el)
+    }
+    const log = (str) => {
+      console.log(str)
+    }
+
+
+    // 2
+    $('#css2-menu').addEventListener('click', function() {
+      log(this.className)
+      if (this.className.indexOf('show') > -1) {
+        this.className = 'menu'
+      } else {
+        this.className = 'menu show'
+      }
+    }, {passive: true})
+
+    // 7
+    $('#css7-open').addEventListener('click', function() {
+      log($('#css7-box').className)
+      if ($('#css7-box').className.indexOf('show') > -1) {
+        $('#css7-box').className = 'box'
+      } else {
+        $('#css7-box').className = 'box show'
+      }
+    }, {passive: true})
+    $('#css7-search').addEventListener('click', function() {
+      log($('#css7-input').className)
+      if ($('#css7-input').className.indexOf('show') > -1) {
+        $('#css7-input').className = 'input'
+      } else {
+        $('#css7-input').className = 'input show'
+      }
+    }, {passive: true})
+  </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>qq未读消息效果</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 	<style type="text/css">
 		canvas {
 			display: block;
@@ -161,13 +161,13 @@
 			cxt.fill();
 		}
 		// pc
-		mycanvas.addEventListener('mousedown',touchstart,true);
-		mycanvas.addEventListener('mousemove',touchmove,true);
-		mycanvas.addEventListener('mouseup',touchend,true);
+		mycanvas.addEventListener('mousedown',touchstart,{passive: true});
+		mycanvas.addEventListener('mousemove',touchmove,{passive: true});
+		mycanvas.addEventListener('mouseup',touchend,{passive: true});
 		// 触屏
-		mycanvas.addEventListener('touchstart',touchstart,true);
-		mycanvas.addEventListener('touchmove',touchmove,true);
-		mycanvas.addEventListener('touchend',touchend,true);
+		mycanvas.addEventListener('touchstart',touchstart,{passive: true});
+		mycanvas.addEventListener('touchmove',touchmove,{passive: true});
+		mycanvas.addEventListener('touchend',touchend,{passive: true});
 		
 	</script>
 </body>
