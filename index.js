@@ -2,13 +2,20 @@ const Koa = require('koa')
 const Router = require('koa-router')  // 路由
 const static = require('koa-static') // 静态资源
 const render = require('koa-art-template') // 模版引擎 kuai
-const markdown = require('markdown-js')  // markdown 转 html
+const markdown = require('marked')  // markdown 转 html
 const path = require('path')  // 原生模块
 const fs = require('fs')
 const config = require('./config.js')
 
 const app = new Koa()
 const router = new Router()
+
+
+markdown.setOptions({
+  highlight: function (code) {
+      return require('highlight.js').highlightAuto(code).value
+  }
+})
 
 // html模版引擎
 render(app, {
@@ -39,11 +46,14 @@ const baidu = `<script>
                 })();
                 </script>`
 
+const markdownStyle = `<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">`
+
 // css 中间件
 app.use(async (ctx, next) => {
   ctx.state = {
     headerHtml,
-    baidu
+    baidu,
+    markdownStyle
   }
   await next()
 })
@@ -70,19 +80,23 @@ router
   })
   .get('/notes', async (ctx, next) => {
     const str = fs.readFileSync(path.join(__dirname, 'markdown/' + config.notes[0].url + '.md'), 'utf-8')
-    const html = markdown.parse(str).toString()
+    // const html = markdown.parse(str).toString()
+    const html = markdown(str)
     await ctx.render('notes', {
       notes: config.notes,
       active: config.notes[0].url,
+      markdownStyle,
       html
     })
   })
   .get('/notes/index.html', async (ctx, next) => {
     const str = fs.readFileSync(path.join(__dirname, 'markdown/' + config.notes[0].url + '.md'), 'utf-8')
-    const html = markdown.parse(str).toString()
+    // const html = markdown.parse(str).toString()
+    const html = markdown(str)
     await ctx.render('notes', {
       notes: config.notes,
       active: config.notes[0].url,
+      markdownStyle,
       html
     })
   })

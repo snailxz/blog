@@ -1,6 +1,30 @@
 const config = {
   notes: [
     {
+      name: '持续集成系列-第1篇',
+      url: 'ci-1'
+    },
+    {
+      name: '持续集成系列-第0篇',
+      url: 'ci-0'
+    },
+    {
+      name: '开发一个简单的cli工具',
+      url: 'create-cli'
+    },
+    {
+      name: 'CentOS 下的 docker 安装',
+      url: 'CentOS-install-docker'
+    },
+    {
+      name: 'vue-cli3 中使用 webpack-spritesmith 详解',
+      url: 'vue-cli3-use-webpack-spritesmith'
+    },
+    {
+      name: 'vue mixin(混入)详解',
+      url: 'vue-mixin'
+    },
+    {
       name: '常用vscode插件',
       url: 'common-vscode-plugin'
     },

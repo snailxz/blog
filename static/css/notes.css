@@ -16,6 +16,7 @@ img {
 }
 .sidebar .title {
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .sidebar .nav-box .nav-bg {
   display: none;
@@ -161,9 +162,9 @@ img {
     100% {transform: rotate(135deg)}
   }
   .sidebar .title {
+    margin-bottom: 0;
     line-height: 50px;
     text-align: center;
-    margin-bottom: 0;
   }
   .sidebar .nav-box {
     z-index: 1000;

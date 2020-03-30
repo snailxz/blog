@@ -21,7 +21,7 @@ function LazyLoadImg() {
     }
 }
 
-window.removeEventListener('scroll', LazyLoadImg)
+window.addEventListener('scroll', LazyLoadImg)
 ```
 
 这样一个简单的懒加载器就完成了，但是我们的实现还太简单，按照上边的写法，我们刚进入页面的时候首屏的图片是不会显示的，所以我们要在进入页面时手动调用一次懒加载方法：

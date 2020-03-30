@@ -1,9 +1,11 @@
 ## 按照官网教程逐步安装
  
-> https://about.gitlab.com/install/
+[https://about.gitlab.com/install/](https://about.gitlab.com/install/)
 
+* 注意 执行这句时 `sudo EXTERNAL_URL="https://gitlab.example.com" yum install -y gitlab-ee
+` 引号里边的 `https://gitlab.example.com` 需要改成自己的ip端口号或者域名
 
-## 如果要修改访问路径
+## 如果之后要修改访问路径
 1. 打开
 ```bash
 vim /etc/gitlab/gitlab.rb
