@@ -26,7 +26,7 @@ class Main {
 			y = e.changedTouches[0].clientY
 			e.preventDefault()
 			e.stopPropagation()
-		}, {passive: true})
+		}, {passive: false})
 		canvas.addEventListener('touchend', function (e) {
 			let stop = window.performance.now() - start
 			let endx = x - e.changedTouches[0].clientX
@@ -58,7 +58,7 @@ class Main {
 			}
 			e.preventDefault()
 			e.stopPropagation()
-		}, {passive: true})
+		}, {passive: false})
 		document.addEventListener('keydown', function(e) {
 			switch(e.keyCode) {
 				case 37:
@@ -85,7 +85,7 @@ class Main {
 			}
 			e.preventDefault()
 			e.stopPropagation()
-		}, {passive: true})
+		}, {passive: false})
 	}
 	loop() {
 		this.drawGame.draw(ctx)

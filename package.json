@@ -21,6 +21,9 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "markdown-js": "^0.0.4",
-    "marked": "^0.8.2"
+    "marked": "^0.8.2",
+    "redis": "^3.0.2",
+    "sha1": "^1.1.1",
+    "string-random": "^0.1.3"
   }
 }

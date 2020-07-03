@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <title>sudoku</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .page {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 342px;
+      height: 100vh;
+      font-size: 18px;
+    }
+    .title {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 20px;
+      width: 100%;
+      font-size: 30px;
+      text-align: center;
+    }
+    .level-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 342px;
+      height: 50px;
+    }
+    .level {
+      padding: 3px;
+      width: 100px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .btn-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 342px;
+      height: 50px;
+    }
+    .btn-box .btn {
+      width: 50px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background-color: #ccc;
+      cursor: pointer;
+    }
+    .sudoku-box {
+      display: flex;
+      flex-direction: column;
+      width: 342px;
+      height: 342px;
+      border: 2px solid #000;
+    }
+    .sudoku-box .sudoku-line {
+      display: flex;
+      width: 100%;
+      flex: 1;
+    }
+    .sudoku-box .sudoku-line:nth-child(3n) {
+      border-bottom: 2px solid #000;
+    }
+    .sudoku-box .sudoku-line:last-child {
+      border-bottom: none;
+    }
+    .sudoku-box .sudoku-line .sudoku-item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    .sudoku-box .sudoku-line .sudoku-item:nth-child(3n) {
+      border-right: 2px solid #000;
+    }
+    .sudoku-box .sudoku-line .sudoku-item:last-child {
+      border-right: none;
+    }
+    .sudoku-box .sudoku-line .is-sel-bgc {
+      background-color: #e9e9e9;
+    }
+    .sudoku-box .sudoku-line span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .sudoku-box .sudoku-line .is-active {
+      color: #fff;
+      border: 2px solid #2196F3;
+    }
+    .sudoku-box .sudoku-line .is-wrong {
+      color: #fff;
+      background-color: #ff5722;
+    }
+    .sudoku-box .sudoku-line .is-right {
+      color: #fff;
+      background-color: #4caf50;
+    }
+    .sudoku-box .sudoku-line:nth-child(3n) .sudoku-item {
+      border-bottom: none;
+    }
+    .scope-box {
+      margin-top: 10px;
+      display: flex;
+      width: 342px;
+      height: 38px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .scope-box .scope-item {
+      flex: 1;
+      line-height: 38px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-right: none;
+    }
+    .scope-box .scope-item:last-child {
+      border-right: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="app" v-cloak >
+      <h1 class="title">{{ lookAnswer ? "是不是太难了🤣🤣🤣,要不难度调低一点吧" : "数独"}}</h1>
+      <div class="level-box">
+        <span>难度级别：1～80</span>
+        <input class="level" type="tel" v-model="level">
+      </div>
+      <div class="btn-box">
+        <div class="btn" @click="createArr">重来</div>
+        <div>{{time}}s</div>
+        <div>错误:{{wrongSteps}}</div>
+        <div class="btn" @click="lookAnswer = true">答案</div>
+      </div>
+      <div class="sudoku-box">
+        <div v-if="!lookAnswer" class="sudoku-line" v-for="(item, i) in userSudoku">
+          <div :class="['sudoku-item', isSelBgc(i, j) ? 'is-sel-bgc' : '']" v-for="(it, j) in item" @click="selItem(i, j)">
+            <span :class="[i === sel[0] && j === sel[1] ? 'is-active' : '', 
+                           isSelBgc(i, j) && it && it !== copySudoku[i][j] ? 'is-wrong' : '', 
+                           isSelBgc(i, j) && it === copySudoku[i][j] ? 'is-right' : '' ]">
+              {{ it }}
+            </span>
+          </div>
+        </div>
+        <div v-if="lookAnswer" class="sudoku-line" v-for="(item, i) in copySudoku">
+          <div :class="['sudoku-item', isSelBgc(i, j) ? 'is-sel-bgc' : '']" v-for="(it, j) in item"> 
+            <span :class="[isSelBgc(i, j) && userSudoku[i][j] && it !== userSudoku[i][j] ? 'is-wrong' : '', 
+                           isSelBgc(i, j) && userSudoku[i][j] && it === userSudoku[i][j] ? 'is-right' : '' ]">
+              {{ it }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="scope-box">
+        <span class="scope-item" v-for="item in scope" @click="userAnswer(item)">{{item}}</span>
+      </div>
+    </div>
+  </div>
+  
+  <script src="./vue.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        level: 30,  // 难度等级
+        lookAnswer: false,  // 是否查看答案
+        wrongSteps: 0, // 当前答题是否错误
+        time: 0,  // 答题计时
+        scope: [1,2,3,4,5,6,7,8,9],  // 数字
+        sel: [0, 0],  // 当前所选位置
+        canSel: [],  // 所有可选位置
+        baseSudoku: [
+                    [9,8,2,4,5,3,6,1,7],
+                    [4,7,3,9,1,6,5,2,8],
+                    [6,1,5,8,2,7,4,9,3],
+                    [8,2,6,3,7,1,9,4,5],
+                    [5,3,4,6,9,8,2,7,1],
+                    [1,9,7,2,4,5,8,3,6],
+                    [7,4,8,5,3,2,1,6,9],
+                    [2,6,1,7,8,9,3,5,4],
+                    [3,5,9,1,6,4,7,8,2]
+                  ],  // 用于生成棋盘的
+        userSudoku: [],  // 用户答题的
+        copySudoku: [],  // 用于对比的
+      },
+      mounted: function() {
+        this.createArr()
+      },
+      methods: {
+        // 打乱数组
+        randomsort: function(a, b) {
+          return Math.random()>.5 ? -1 : 1;
+        },
+        // 选中
+        selItem: function(i,j) {
+          if (this.lookAnswer) return
+          if (this.canSel.filter(item => i === item[0] && j === item[1]).length > 0) {
+            this.sel = [i, j]
+          }
+        },
+        //  是否可以选
+        isSelBgc: function(i,j) {
+          return this.canSel.filter(item => i === item[0] && j === item[1]).length > 0
+        },
+        // 用户答题
+        userAnswer: function(num) {
+          if (this.lookAnswer) return
+          this.$set(this.userSudoku[this.sel[0]], this.sel[1], num)
+          if (num !== this.copySudoku[this.sel[0]][this.sel[1]]) {
+            this.wrongSteps++
+          }
+          if (this.ifCanUse(this.userSudoku)) {
+            alert('答题成功！你真是绝顶聪明啊')
+          }
+        },
+        // 判断生成数据是否可用
+        ifCanUse: function(arr) {
+          let ifUse = true, i = 0
+          while(ifUse && i < 9) {
+            // 行对比
+            arr[i].forEach((item, index) => {
+              const copyArr = [].concat(arr[i])
+              copyArr.splice(index, 1)
+              if (item && copyArr.includes(item) || !item) ifUse = false
+            });
+            // 列对比
+            let vertical = []
+            arr.forEach(item => {
+              vertical.push(item[i])
+            })
+            vertical.forEach((item, index) => {
+              const copyArr = [].concat(vertical)
+              copyArr.splice(index, 1)
+              if (item && copyArr.includes(item) || !item) ifUse = false
+            });
+            // 宫对比
+            let block = []
+            arr.forEach((item, index) => {
+              item.forEach((num, idx) => {
+                const xx = ~~(i/3)
+                const yy = i%3
+                if (index >= xx * 3 && 
+                    index <= xx * 3 + 2 && 
+                    idx >= yy * 3 &&
+                    idx <= yy * 3 + 2) {
+                  block.push(num)
+                }
+              })
+            })
+            block.forEach((item, index) => {
+              const copyArr = [].concat(block)
+              copyArr.splice(index, 1)
+              if (item && copyArr.includes(item) || !item) ifUse = false
+            });
+            i++
+          }
+          return ifUse
+        },
+        // 计时器
+        create: function() {
+          this.timer && clearInterval(this.timer)
+          this.time = 0
+          this.timer = setInterval(() => {
+            this.time++
+          }, 1000);
+        },
+        // 生成数独
+        createArr: function() {
+          this.create()
+          this.lookAnswer = false
+          this.wrongSteps = 0
+          this.canSel = []
+          
+          if (this.level > 80) this.level = 80
+          if (this.level < 1) this.level = 1
+
+          let copyArr = [].concat(this.scope)
+          copyArr.sort(this.randomsort)
+          copyArr = [0].concat(copyArr)
+          let copyCanUse = JSON.parse(JSON.stringify(this.baseSudoku))
+          copyCanUse.map((item, i) => {
+            item.map((it, j) => {
+              copyCanUse[i][j] = copyArr[it]
+            })
+          })
+          console.log(this.ifCanUse(copyCanUse))
+          this.userSudoku = JSON.parse(JSON.stringify(copyCanUse))
+          let level = this.level
+          while (level) {
+            const i = ~~(Math.random() * copyCanUse.length)
+            const j = ~~(Math.random() * copyCanUse[0].length)
+            if (this.userSudoku[i][j]) {
+              if (level === this.level) {
+                this.sel = [i, j]
+              }
+              this.canSel.push([i,j])
+              level--
+              this.userSudoku[i][j] = ''
+            }
+          }
+          this.copySudoku = JSON.parse(JSON.stringify(copyCanUse))
+          console.log(this.copySudoku)
+        },
+      }
+    })
+  </script>
+</body>
+</html>

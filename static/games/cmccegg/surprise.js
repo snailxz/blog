@@ -1,14 +1,14 @@
 class Game {
   constructor () {
-    let btn = document.createElement('button')
-    btn.innerHTML = '关闭彩蛋'
-    btn.className = 'surpriseClose'
-    document.body.appendChild(btn)
-    let _this = this
-    btn.addEventListener('click', function () {
-      _this.closeGame()
-    }, false)
-    this.closeBtn = btn
+    // let btn = document.createElement('button')
+    // btn.innerHTML = '关闭彩蛋'
+    // btn.className = 'surpriseClose'
+    // document.body.appendChild(btn)
+    // let _this = this
+    // btn.addEventListener('click', function () {
+    //   _this.closeGame()
+    // }, false)
+    // this.closeBtn = btn
     let btn1 = document.createElement('button')
     btn1.innerHTML = '再来一次'
     btn1.className = 'surpriseAgain'
@@ -176,7 +176,7 @@ class Game {
     }
     let body = document.querySelector('body')
     body.removeChild(this.canvas)
-    body.removeChild(this.closeBtn)
+    // body.removeChild(this.closeBtn)
     body.removeChild(this.againBtn)
   }
   // 开始

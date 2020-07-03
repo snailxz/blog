@@ -12,13 +12,37 @@
       margin: 0;
       padding: 0;
     }
+    html,body {
+      height: 100vh;
+    }
     canvas {
       display: block;
       width: 100%;
     }
+    .tip {
+      display: none;
+    }
+    @media screen and (min-width: 960px) {
+      canvas {
+        display: block;
+        margin: 0 auto;
+        width: auto;
+        height: 100vh;
+      }
+      .tip {
+        display: block;
+        z-index: 2;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="tip">使用键盘上下左右控制</div>
   <canvas id="c"></canvas>
   <script src="./initGame.js"></script>
   <script src="./main.js"></script>

@@ -1,6 +1,6 @@
 // 获取屏幕宽高
-const screenWidth = window.innerWidth
-const screenHeight = window.innerHeight
+const screenWidth = window.innerWidth > 640 ? 640 : window.innerWidth
+const screenHeight = window.innerWidth > 640 ? 1000 : window.innerHeight
 const DPR = window.devicePixelRatio
 const canvas = document.querySelector('#c')
 // 设置canvas大小

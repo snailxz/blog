@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   notes: [
     {
       name: '持续集成系列-第1篇',
@@ -155,16 +155,19 @@ const config = {
   ],
   games: [
     {
-      title: '彩蛋小游戏(请在手机，或手机模式打开)',
+      title: '彩蛋小游戏',
       img: '/images/games/cmccegg.png',
       url: '/games/cmccegg/index.html'
     },
     {
-      title: '2048(请在手机，或手机模式打开)',
+      title: '2048',
       img: '/images/games/2048.png',
       url: '/games/2048/index.html'
+    },
+    {
+      title: '数独',
+      img: '/images/games/sudoku.png',
+      url: '/games/sudoku/index.html'
     }
   ]
 }
-
-module.exports = config

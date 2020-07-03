@@ -1,11 +1,15 @@
-const Koa = require('koa')
-const Router = require('koa-router')  // 路由
-const static = require('koa-static') // 静态资源
-const render = require('koa-art-template') // 模版引擎 kuai
+const Koa      = require('koa')
+const Router   = require('koa-router')  // 路由
+const static   = require('koa-static') // 静态资源
+const render   = require('koa-art-template') // 模版引擎 kuai
 const markdown = require('marked')  // markdown 转 html
-const path = require('path')  // 原生模块
-const fs = require('fs')
-const config = require('./config.js')
+const sha1     = require('sha1')  // sha加密模块
+const path     = require('path')  // 原生模块
+const fs       = require('fs')
+
+const config   = require('./config')
+const wxConfig = require('./weixin/config')
+const wxUtils  = require('./weixin/utils')
 
 const app = new Koa()
 const router = new Router()
@@ -46,7 +50,7 @@ const baidu = `<script>
                 })();
                 </script>`
 
-const markdownStyle = `<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">`
+const markdownStyle = `<link href="https://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">`
 
 // css 中间件
 app.use(async (ctx, next) => {
@@ -80,7 +84,6 @@ router
   })
   .get('/notes', async (ctx, next) => {
     const str = fs.readFileSync(path.join(__dirname, 'markdown/' + config.notes[0].url + '.md'), 'utf-8')
-    // const html = markdown.parse(str).toString()
     const html = markdown(str)
     await ctx.render('notes', {
       notes: config.notes,
@@ -91,7 +94,6 @@ router
   })
   .get('/notes/index.html', async (ctx, next) => {
     const str = fs.readFileSync(path.join(__dirname, 'markdown/' + config.notes[0].url + '.md'), 'utf-8')
-    // const html = markdown.parse(str).toString()
     const html = markdown(str)
     await ctx.render('notes', {
       notes: config.notes,
@@ -145,6 +147,30 @@ router
   })
   .get('/about.html', async (ctx) => {
     await ctx.render('about')
+  })
+  .get('/wechat', async (ctx) => {
+    const reqStr = [
+      wxConfig.token, 
+      ctx.request.query.nonce, 
+      ctx.request.query.timestamp
+    ].sort().join('')
+    const sha = sha1(reqStr)
+    ctx.body = sha === ctx.request.query.signature ? ctx.request.query.echostr : 'failed'
+  })
+  .get('/wechatmenu', async (ctx) => {
+    const as = await wxUtils.setMenu(ctx.request.query.menu)
+    console.log(as)
+    ctx.body = as
+  })
+  .get('/wxUserInfo', async (ctx) => {
+    const as = await wxUtils.getUserInfo(ctx.request.query.code)
+    console.log(as)
+    ctx.body = as
+  })
+  .get('/webConfig', async (ctx) => {
+    const as = await wxUtils.getWebConfig(ctx.request.header.referer)
+    console.log(as)
+    ctx.body = as
   })
 
 app
