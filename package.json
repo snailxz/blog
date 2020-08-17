@@ -4,7 +4,7 @@
   "description": "snail'blog",
   "main": "index.js",
   "scripts": {
-    "server": "node index.js",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
