@@ -178,6 +178,6 @@ app
   .use(router.allowedMethods())
 
 // 监听端口
-app.listen(8088, () => {
+app.listen(process.env.PORT || 8088, () => {
   console.log('http://127.0.0.1:8088')
 })
